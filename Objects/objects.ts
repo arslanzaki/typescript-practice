@@ -44,3 +44,119 @@ function doublePoint(point: Point): Point {
 
 type myNum = number;
 let age: myNum;
+
+// ##########################################################
+// NESTED OBJECTS
+
+const describePerson = (person: {
+  name: string;
+  age: number;
+  parentNames: {
+    mom: string;
+    dad: string;
+  };
+}) => {
+  return `Person: ${person.name}, Age: ${person.age}, \nParents: ${person.parentNames.mom}, ${person.parentNames.dad}`;
+};
+
+describePerson({
+  name: "Arslan",
+  age: 22,
+  parentNames: { mom: "Fozia", dad: "Asghar" },
+});
+
+// ##########################################################
+
+type Song = {
+  title: string;
+  artist: string;
+  numStreams: number;
+  credits: {
+    producer: string;
+    writer: string;
+  };
+};
+
+function calculatePayout(song: Song): number {
+  return song.numStreams * 0.045;
+}
+function printSong(song: Song): void {
+  console.log(`${song.title} - ${song.artist}`);
+}
+
+const mySong: Song = {
+  title: "Unchained Melody",
+  artist: "Righteous Brothers",
+  numStreams: 123789,
+  credits: {
+    producer: "Arslan Zaki",
+    writer: "Alex Bhatti",
+  },
+};
+
+console.log(calculatePayout(mySong));
+printSong(mySong);
+
+// ##########################################################
+// OPTIONAL PROPERTIES
+
+type PointCoords = {
+  x: number;
+  y: number;
+  z?: number;
+};
+
+const myPointCoords01: PointCoords = { x: 123, y: 888, z: 090 };
+const myPointCoords02: PointCoords = { x: 313, y: 198 };
+
+// ##########################################################
+// READONLY MODIFIER
+
+type User = {
+  readonly id: number;
+  username: string;
+};
+
+const user: User = {
+  id: 12345,
+  username: "arslanzaki",
+};
+
+console.log(user.id);
+//user.id = 9898; ERROR
+
+// ##########################################################
+// INTERSECTION TYPES
+
+type Circle = {
+  radius: number;
+};
+
+type Colorful = {
+  color: string;
+};
+
+type ColorfulCircle = Circle & Colorful;
+
+const happyFace: ColorfulCircle = {
+  radius: 7,
+  color: "green",
+};
+
+// ##########################################################
+
+type Cat = {
+  numLives: number;
+};
+
+type Dog = {
+  breed: string;
+};
+
+type CatDog = Cat & Dog & { age: number };
+
+const myCatDog: CatDog = {
+  numLives: 7,
+  breed: "persian",
+  age: 3,
+};
